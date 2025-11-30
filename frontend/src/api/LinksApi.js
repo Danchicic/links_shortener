@@ -5,6 +5,7 @@ class _LinksApi {
     }
 
     async getShortLink(longLink) {
+        return "mewmew"
 
     }
 
