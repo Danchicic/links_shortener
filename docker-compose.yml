@@ -6,3 +6,29 @@ services:
       - ./backend/link_shortener:/app/link_shortener
     ports:
       - "8080:8080"
+    depends_on:
+      redis_db:
+        condition: service_healthy
+    environment:
+      REDIS_PORT: 6379
+      REDIS_HOST: redis_db
+      REDIS_DB: 0
+
+
+  redis_db:
+    image: redis:8.4.0
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    healthcheck:
+      test: [ "CMD", "redis-cli", "PING" ]
+      interval: 3s
+      timeout: 2s
+      retries: 5
+
+
+volumes:
+  redis_data:
