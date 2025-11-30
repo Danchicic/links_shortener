@@ -1,0 +1,8 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    volumes:
+      - ./backend/link_shortener:/app/link_shortener
+    ports:
+      - "8080:8080"
