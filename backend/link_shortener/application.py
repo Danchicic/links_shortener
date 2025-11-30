@@ -11,12 +11,13 @@ app.include_router(main_router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://localhost"],
     allow_credentials=True,
     allow_methods=["*"],
 
-
 )
+
+
 @app.get("/liveness")
 async def liveness():
     return {"status": "active!"}

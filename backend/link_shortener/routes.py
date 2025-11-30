@@ -19,9 +19,9 @@ redis_instance: Redis = Redis(
 
 
 @router.get("/{id}")
-async def get_link_by_id(id: str) -> str:
+async def get_link_by_id(id: str) -> LinkSchema:
     if long_link := await redis_instance.get(id):
-        return long_link
+        return LinkSchemaResponse(link=long_link)
     raise HTTPException(status_code=404, detail="Link not found")
 
 
