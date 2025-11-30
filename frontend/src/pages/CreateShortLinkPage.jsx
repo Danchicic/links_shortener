@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreatePasswordPage = () => {
+const CreateShortLinkPage = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const CreatePasswordPage = () => {
     );
 };
 
-export default CreatePasswordPage;
+export default CreateShortLinkPage;
