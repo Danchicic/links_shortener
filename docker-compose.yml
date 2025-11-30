@@ -1,4 +1,18 @@
 services:
+  frontend:
+    image: node:20-slim   # можно заменить на свой образ с билдом или использовать Dockerfile
+    container_name: frontend
+    working_dir: /app
+    volumes:
+      - ./frontend:/app       # монтируем исходники
+      - /app/node_modules     # чтобы node_modules оставались в контейнере
+    ports:
+      - "80:5173"             # внешний 80 → внутренний 5173
+    command: >
+      sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    restart: always
+
+
   backend:
     build:
       context: ./backend
