@@ -7,7 +7,6 @@ const CreateShortLinkPage = () => {
     const [loading, setLoading] = useState(false);      // состояние загрузки
     const [error, setError] = useState("");             // ошибка запроса
     const [loaded, setLoaded] = useState(false);
-    const [copied, setCopied] = useState(false);
 
     const handleCreate = async () => {
         if (!longLink) return;
@@ -15,10 +14,10 @@ const CreateShortLinkPage = () => {
         setError("");
         try {
             const result = await LinksApi.getShortLink(longLink);
-            setShortLink(result); // предполагается, что API возвращает короткую ссылку
-            navigator.clipboard.writeText(result);
+            const shortLink = result['link']
+            setShortLink(shortLink); // предполагается, что API возвращает короткую ссылку
+            navigator.clipboard.writeText(shortLink);
             setLoaded(true);
-            setCopied(true);
         } catch (err) {
             setError("Failed to create short link");
             console.error(err);
@@ -62,7 +61,7 @@ const CreateShortLinkPage = () => {
                     }}
                 />
             </div>
-            {copied && <p style={{color: "green", marginTop: "10px"}}>Ссылка скопирована!</p>}
+            {loaded && <p style={{color: "green", marginTop: "10px"}}>Ссылка скопирована!</p>}
 
             {/* Ошибка */}
             {error && <p style={{color: "red", marginTop: "10px"}}>{error}</p>}

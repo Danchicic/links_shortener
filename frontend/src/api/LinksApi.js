@@ -5,7 +5,20 @@ class _LinksApi {
     }
 
     async getShortLink(longLink) {
-        return "mewmew"
+        const resp = await fetch(`${this.host}/links/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                "link": longLink
+            })
+        })
+        if (resp.status === 200) {
+            return await resp.json();
+        } else {
+            return null;
+        }
 
     }
 
